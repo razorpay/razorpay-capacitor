@@ -1,5 +1,6 @@
 import Foundation
 import Capacitor
+import Razorpay
 
 /**
  * Please read the Capacitor iOS Plugin Development Guide
@@ -7,6 +8,8 @@ import Capacitor
  */
 @objc(Checkout)
 public class Checkout: CAPPlugin {
+    
+    var call: CAPPluginCall?
     
     @objc func echo(_ call: CAPPluginCall) {
         let value = call.getString("value") ?? ""
@@ -16,25 +19,36 @@ public class Checkout: CAPPlugin {
     }
     
     @objc func open(_ call: CAPPluginCall) {
-        let value = call.getString("value") ?? ""
-        call.success([
-            "value": value
-        ])
+        self.call = call
+        let key = call.getString("key") ?? ""
+        guard var option = call.options else { return }
+        option["integration"] = "capacitor"
+        option["FRAMEWORK"] = "capacitor"
+        DispatchQueue.main.async {
+            let razorpayObj = RazorpayCheckout.initWithKey(key, andDelegate: self)
+            razorpayObj.setExternalWalletSelectionDelegate(self)
+            razorpayObj.open(option)
+        }
     }
 }
 
-/*
- <ion-header>
-   <ion-toolbar color="primary">
-     <ion-title>
-       Devdactic Capacitor Plugin
-     </ion-title>
-   </ion-toolbar>
- </ion-header>
-  
- <ion-content>
-   <ion-button expand="full" (click)="loadContacts()">
-     Load Contacts
-   </ion-button>
- </ion-content>
- */
+extension Checkout : RazorpayPaymentCompletionProtocol, ExternalWalletSelectionProtocol {
+    
+    public func onPaymentError(_ code: Int32, description str: String) {
+        if let call = call {
+            call.reject("\(code): \(str)")
+        }
+    }
+    
+    public func onPaymentSuccess(_ payment_id: String) {
+        if let call = call {
+            call.success(["value":"\(payment_id)"])
+        }
+    }
+    
+    public func onExternalWalletSelected(_ walletName: String, withPaymentData paymentData: [AnyHashable : Any]?) {
+        if let call = call {
+            call.success(["":""])
+        }
+    }
+}
