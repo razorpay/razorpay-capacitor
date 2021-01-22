@@ -42,13 +42,13 @@ extension Checkout : RazorpayPaymentCompletionProtocol, ExternalWalletSelectionP
     
     public func onPaymentSuccess(_ payment_id: String) {
         if let call = call {
-            call.success(["value":"\(payment_id)"])
+            call.success(["response":"\(payment_id)"])
         }
     }
     
     public func onExternalWalletSelected(_ walletName: String, withPaymentData paymentData: [AnyHashable : Any]?) {
         if let call = call {
-            call.success(["":""])
+            call.reject(walletName)
         }
     }
 }

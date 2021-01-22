@@ -15,11 +15,12 @@ export class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
   }
 
 
-  async open(options: { value: string, key: string, amount: string }): Promise<{ value: string }> {
+  async open(options: { key: string, amount: string }): Promise<{ response: string }> {
     console.log('Open', options);
-    return options;
+    return {
+      response: options.key
+  };
   }
-
 }
 
 const Checkout = new CheckoutWeb();

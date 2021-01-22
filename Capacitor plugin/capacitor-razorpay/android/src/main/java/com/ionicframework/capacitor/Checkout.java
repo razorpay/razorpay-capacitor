@@ -10,11 +10,38 @@ import com.getcapacitor.PluginMethod;
 public class Checkout extends Plugin {
 
     @PluginMethod
-    public void echo(PluginCall call) {
-        String value = call.getString("value");
-
-        JSObject ret = new JSObject();
-        ret.put("value", value);
-        call.success(ret);
+public void open(PluginCall call){
+    saveCall(call);
+    try{
+        Intent intent = new Intent(getActivity(), CheckoutActivity.class);
+        intent.putExtra("OPTIONS",call.getString("options"));
+        intent.putExtra("FRAMEWORK","CAPACITOR");
+        intent.putExtra("integration","CAPACITOR");        
+        startActivityForResult(call,intent,com.razorpay.Checkout.RZP_REQUEST_CODE);
+    }catch (Exception e){
     }
+}
+@Override
+protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
+    super.handleOnActivityResult(requestCode, resultCode, data);
+    com.razorpay.Checkout.handleActivityResult(getActivity(), com.razorpay.Checkout.RZP_REQUEST_CODE,resultCode,data,this,this);
+}
+@Override
+public void onExternalWalletSelected(String s, PaymentData paymentData) {
+    savedLastCall.reject(s);
+}
+@Override
+public void onPaymentSuccess(String s, PaymentData paymentData) {
+    JSObject jsObject = new JSObject();
+try{
+    jsObject.put("response",s);
+}catch (Exception e){
+    e.printStackTrace();
+}
+savedLastCall.success(jsObject);
+}
+@Override
+public void onPaymentError(int i, String s, PaymentData paymentData) {
+    savedLastCall.reject(s,""+i);
+}
 }
