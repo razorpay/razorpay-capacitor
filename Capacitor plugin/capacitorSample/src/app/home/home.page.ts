@@ -22,28 +22,28 @@ export class HomePage {
 
   async loadCheckout() {
     const options = {
-    "key": "rzp_test_1DP5mmOlF5G5ag", // Enter the Key ID generated from the Dashboard
-    "amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "Acme Corp",
-    "description": "Test Transaction",
-  
-    "retry":{
-      "enabled":false,
-      "max_count":0
-    },
-    "prefill": {
-        "name": "Gaurav Kumar",
-        "email": "gaurav.kumar@example.com",
-        "contact": "9999999999"
-    },
-    "notes": {
-        "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-        "color": "#3399cc"
-    }
-};
+      "key": "rzp_test_1DP5mmOlF5G5ag", // Enter the Key ID generated from the Dashboard
+      "amount": "100", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      "currency": "INR",
+      "name": "Acme Corp",
+      "description": "Test Transaction",
+    
+      "retry":{
+        "enabled":false,
+        "max_count":0
+      },
+      "prefill": {
+          "name": "Gaurav Kumar",
+          "email": "gaurav.kumar@example.com",
+          "contact": "9999999999"
+      },
+      "notes": {
+          "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+    };
     // const options = { key: 'rzp_test_1DP5mmOlF5G5ag', amount: '100', description: 'Credits towards consultation', image: 'https://i.imgur.com/3g7nmJC.png', currency: 'INR', name: 'foo', prefill: { email: 'void@razorpay.com', contact: '9191919191', name: 'Razorpay Software'}, theme: {color: '#F37254'}}
     try {
     let data = (await Checkout.open(options));
