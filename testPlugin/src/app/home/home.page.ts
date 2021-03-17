@@ -20,9 +20,9 @@ export class HomePage {
     const options = { key: 'rzp_test_1DP5mmOlF5G5ag', amount: '5000', description: 'Credits towards consultation', image: 'https://i.imgur.com/3g7nmJC.png', currency: 'INR', name: 'foo', prefill: { email: 'void@razorpay.com', contact: '9191919191', name: 'Razorpay Software'}, theme: {color: '#F37254'}}
     try {
     let data = (await Checkout.open(options));
-    this.presentAlert(data.response);
+    this.presentAlert(data['response']);
     } catch (error) {
-      this.presentAlert(error.message); //Doesn't appear at all
+      this.presentAlert(error['description']); //Doesn't appear at all
     }
   }
 
