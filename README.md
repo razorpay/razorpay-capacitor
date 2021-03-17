@@ -47,7 +47,7 @@ public class MainActivity extends BridgeActivity {
 ## Usage (iOS, Web, Android)
 
 ```ts
-import  'capacitor-razorpay-test';
+import  'capacitor-razorpay';
 import { Plugins } from '@capacitor/core';
 const { Checkout } = Plugins;
 
