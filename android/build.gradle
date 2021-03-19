@@ -44,7 +44,7 @@ repositories {
 
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
     implementation project(':capacitor-android')
     testImplementation "junit:junit:$junitVersion"
     implementation 'com.razorpay:checkout:1.6.6'
