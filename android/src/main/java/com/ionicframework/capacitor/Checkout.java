@@ -32,7 +32,6 @@ public class Checkout extends Plugin  {
             Intent intent = new Intent(getActivity(), CheckoutActivity.class);
             intent.putExtra("OPTIONS", jsObject.toString());
             intent.putExtra("FRAMEWORK", "CAPACITOR");
-            intent.putExtra("integration", "CAPACITOR");
             startActivityForResult(call,intent,com.razorpay.Checkout.RZP_REQUEST_CODE);
 
         } catch (Exception e) {
