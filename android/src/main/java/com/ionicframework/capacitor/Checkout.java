@@ -18,9 +18,7 @@ import com.razorpay.PaymentResultWithDataListener;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-@NativePlugin(
-        requestCodes = {com.razorpay.Checkout.RZP_REQUEST_CODE}
-)
+@NativePlugin(requestCodes = {com.razorpay.Checkout.RZP_REQUEST_CODE})
 public class Checkout extends Plugin  {
 
 
@@ -32,7 +30,8 @@ public class Checkout extends Plugin  {
             Intent intent = new Intent(getActivity(), CheckoutActivity.class);
             intent.putExtra("OPTIONS", jsObject.toString());
             intent.putExtra("FRAMEWORK", "CAPACITOR");
-            startActivityForResult(call,intent,com.razorpay.Checkout.RZP_REQUEST_CODE);
+            intent.putExtra("integration", "CAPACITOR");
+            startActivityForResult(call, intent, com.razorpay.Checkout.RZP_REQUEST_CODE);
 
         } catch (Exception e) {
             Log.d("Error", e.getLocalizedMessage());
@@ -47,20 +46,28 @@ public class Checkout extends Plugin  {
             @Override
             public void onPaymentSuccess(String s, PaymentData paymentData) {
                 try {
+
                     JSObject jsObject = new JSObject();
                     try {
-                        jsObject.put("response", paymentData.getData().toString());
+
+                        JSObject dataObject = new JSObject();
+                        dataObject.put("razorpay_payment_id",paymentData.getPaymentId());
+                        dataObject.put("razorpay_order_id",paymentData.getOrderId());
+                        dataObject.put("razorpay_signature",paymentData.getSignature());
+
+                        jsObject.put("response", dataObject);
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Log.d("RESULT",jsObject.toString());
-//                    Log.e("LAST_CALL","Hello"+getSavedCall().getData().toString());
 
                     if (lastSavedCall == null){
                         Log.e("ERROR","no call saved");
                         return;
                     }
                     lastSavedCall.success(jsObject);
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }

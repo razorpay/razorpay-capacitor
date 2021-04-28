@@ -25,7 +25,7 @@ public class Checkout: CAPPlugin {
         option["integration"] = "capacitor"
         option["FRAMEWORK"] = "capacitor"
         DispatchQueue.main.async {
-            let razorpayObj = RazorpayCheckout.initWithKey(key, andDelegate: self)
+            let razorpayObj = RazorpayCheckout.initWithKey(key, andDelegateWithData: self)
             razorpayObj.setExternalWalletSelectionDelegate(self)
             razorpayObj.open(option)
         }
@@ -40,9 +40,38 @@ extension Checkout : RazorpayPaymentCompletionProtocol, ExternalWalletSelectionP
         }
     }
     
-    public func onPaymentSuccess(_ payment_id: String) {
+    public func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
         if let call = call {
-            call.success(["response":"\(payment_id)"])
+            print("success: ", payment_id)
+            print("success: ", response as Any)
+            
+            if let response = response{
+                
+                let order_id = response["razorpay_order_id"] as! String
+                let signature = response["razorpay_signature"] as! String
+                
+                print("success: orderid", order_id)
+                print("success: signature", signature)
+                
+                let jsonObject: [String: Any]  =
+                    [
+                        "razorpay_payment_id":payment_id,
+                        "razorpay_order_id": order_id,
+                        "razorpay_signature": signature
+                    ]
+                
+                call.success(["response":jsonObject])
+            }else{
+                let jsonObject: [String: Any]  =
+                    [
+                        "razorpay_payment_id":payment_id,
+                        "razorpay_order_id": "",
+                        "razorpay_signature": ""
+                    ]
+                
+                call.success(["response":jsonObject])
+            }
+            
         }
     }
     
