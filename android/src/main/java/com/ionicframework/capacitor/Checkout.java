@@ -51,7 +51,7 @@ public class Checkout extends Plugin  {
                 try {
                     JSObject jsObject = new JSObject();
                     try {
-                        jsObject.put("response", paymentData.getData().toString());
+                        jsObject.put("response", paymentData.getData());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
