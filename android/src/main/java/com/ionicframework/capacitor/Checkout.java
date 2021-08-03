@@ -4,11 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.activity.result.ActivityResult;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
+import com.getcapacitor.annotation.ActivityCallback;
 import com.razorpay.CheckoutActivity;
 import com.razorpay.ExternalWalletListener;
 import com.razorpay.PaymentData;
@@ -26,41 +29,39 @@ public class Checkout extends Plugin  {
 
     @PluginMethod
     public void open(PluginCall call) {
-        saveCall(call);
+        call.setKeepAlive(true);
         try {
             JSObject jsObject = call.getData();
             Intent intent = new Intent(getActivity(), CheckoutActivity.class);
             intent.putExtra("OPTIONS", jsObject.toString());
             intent.putExtra("FRAMEWORK", "CAPACITOR");
-            startActivityForResult(call,intent,com.razorpay.Checkout.RZP_REQUEST_CODE);
+            startActivityForResult(call,intent,"handleOnActivityResult");
 
         } catch (Exception e) {
             Log.d("Error", e.getLocalizedMessage());
         }
     }
 
-    @Override
-    protected void handleOnActivityResult(int requestCode, int resultCode, Intent data) {
-        super.handleOnActivityResult(requestCode, resultCode, data);
-        final PluginCall lastSavedCall = getSavedCall();
-        com.razorpay.Checkout.handleActivityResult(getActivity(), com.razorpay.Checkout.RZP_REQUEST_CODE, resultCode, data, new PaymentResultWithDataListener() {
+    @ActivityCallback
+    private void handleOnActivityResult(PluginCall call, ActivityResult result){
+        final PluginCall lastSavedCall = call;
+        com.razorpay.Checkout.handleActivityResult(getActivity(), com.razorpay.Checkout.RZP_REQUEST_CODE, result.getResultCode(), result.getData(), new PaymentResultWithDataListener() {
             @Override
             public void onPaymentSuccess(String s, PaymentData paymentData) {
                 try {
                     JSObject jsObject = new JSObject();
                     try {
-                        jsObject.put("response", paymentData.getData().toString());
+                        jsObject.put("response", paymentData.getData());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     Log.d("RESULT",jsObject.toString());
-//                    Log.e("LAST_CALL","Hello"+getSavedCall().getData().toString());
 
                     if (lastSavedCall == null){
                         Log.e("ERROR","no call saved");
                         return;
                     }
-                    lastSavedCall.success(jsObject);
+                    lastSavedCall.resolve(jsObject);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -13,7 +13,7 @@ public class Checkout: CAPPlugin {
     
     @objc func echo(_ call: CAPPluginCall) {
         let value = call.getString("value") ?? ""
-        call.success([
+        call.resolve([
             "value": value
         ])
     }
@@ -25,24 +25,26 @@ public class Checkout: CAPPlugin {
         option["integration"] = "capacitor"
         option["FRAMEWORK"] = "capacitor"
         DispatchQueue.main.async {
-            let razorpayObj = RazorpayCheckout.initWithKey(key, andDelegate: self)
+            
+            let razorpayObj = RazorpayCheckout.initWithKey(key, andDelegateWithData: self)
             razorpayObj.setExternalWalletSelectionDelegate(self)
             razorpayObj.open(option)
         }
     }
 }
 
-extension Checkout : RazorpayPaymentCompletionProtocol, ExternalWalletSelectionProtocol {
-    
-    public func onPaymentError(_ code: Int32, description str: String) {
+extension Checkout : RazorpayPaymentCompletionProtocolWithData, ExternalWalletSelectionProtocol {
+    public func onPaymentSuccess(_ payment_id: String, andData response: [AnyHashable : Any]?) {
         if let call = call {
-            call.reject("\(code): \(str)")
+            var responseObj = [String:Any]()
+            responseObj["response"]  = response
+//            let jsObject: JSObject = JSObject.init(uniqueKeysWithValues: (response as! NSDictionary))
+            call.resolve(["response":(response) as Any])
         }
     }
-    
-    public func onPaymentSuccess(_ payment_id: String) {
+    public func onPaymentError(_ code: Int32, description str: String, andData response: [AnyHashable : Any]?) {
         if let call = call {
-            call.success(["response":"\(payment_id)"])
+            call.reject("\(code): \(str)")
         }
     }
     

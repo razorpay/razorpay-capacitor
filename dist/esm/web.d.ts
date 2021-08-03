@@ -1,5 +1,5 @@
 import { WebPlugin } from '@capacitor/core';
-import { CheckoutPlugin } from './definitions';
+import type { CheckoutPlugin } from './definitions';
 export declare class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
     constructor();
     echo(options: {
@@ -14,5 +14,6 @@ export declare class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
         response: string;
     }>;
 }
-declare const Checkout: CheckoutWeb;
+declare const Checkout: CheckoutPlugin;
+export * from './definitions';
 export { Checkout };

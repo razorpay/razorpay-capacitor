@@ -1,6 +1,5 @@
-import { WebPlugin } from '@capacitor/core';
-import { CheckoutPlugin } from './definitions';
-
+import { registerPlugin, WebPlugin } from '@capacitor/core';
+import type { CheckoutPlugin } from './definitions';
 
 export class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
   constructor() {
@@ -106,9 +105,12 @@ export class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
   }
 }
 
-const Checkout = new CheckoutWeb();
 
-export { Checkout };
+const Checkout = registerPlugin<CheckoutPlugin>('Checkout',{
+  web: () => import('./web').then(m => new m.CheckoutWeb())
+});
 
-import { registerWebPlugin } from '@capacitor/core';
-registerWebPlugin(Checkout);
+export * from './definitions';
+export {Checkout}
+
+
