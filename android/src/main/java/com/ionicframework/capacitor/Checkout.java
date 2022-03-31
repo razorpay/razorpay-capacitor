@@ -34,7 +34,7 @@ public class Checkout extends Plugin  {
             JSObject jsObject = call.getData();
             Intent intent = new Intent(getActivity(), CheckoutActivity.class);
             intent.putExtra("OPTIONS", jsObject.toString());
-            intent.putExtra("FRAMEWORK", "CAPACITOR");
+            intent.putExtra("FRAMEWORK", "capacitor");
             startActivityForResult(call,intent,"handleOnActivityResult");
 
         } catch (Exception e) {
