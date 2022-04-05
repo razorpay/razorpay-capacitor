@@ -31,15 +31,10 @@ import com.ionicframework.capacitor.Checkout;
 public class MainActivity extends BridgeActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+  super.onCreate(savedInstanceState);
 
-    // Initializes the Bridge
-    this.init(savedInstanceState, new ArrayList<Class<? extends Plugin>>() {{
-      // Additional plugins you've installed go here
-      // Ex: add(TotallyAwesomePlugin.class);
-      add(Checkout.class);
-    }});
-  }
+  registerPlugin(Checkout.class);
+}
 }
 
 ```
@@ -47,34 +42,56 @@ public class MainActivity extends BridgeActivity {
 ## Usage (iOS, Web, Android)
 
 ```ts
-import  'capacitor-razorpay';
-import { Plugins } from '@capacitor/core';
-const { Checkout } = Plugins;
+import { Checkout } from 'capacitor-razorpay';
 
-  async loadCheckout() {
-    const options = { 
-      key: 'rzp_test_1DP5mmOlF5G5ag',
-      amount: '5000',
-      description: 'Credits towards consultation', 
-      image: 'https://i.imgur.com/3g7nmJC.png', 
-      currency: 'INR', 
-      name: 'foo', 
-      prefill: { 
-        email: 'void@razorpay.com', 
-        contact: '9191919191', 
-        name: 'Razorpay Software'
+@Component({
+  selector: 'app-home',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss'],
+})
+export class HomePage {
+
+  constructor(private alertController: AlertController) {}
+
+  async payWithRazorpay(){
+    const options = {
+      key: '[YOUR_KEY_ID]',
+      amount: '100',
+      description: 'Great offers',
+      image: 'https://i.imgur.com/3g7nmJC.png',
+      order_id: 'order_Cp10EhSaf7wLbS',//Order ID generated in Step 1
+      currency: 'INR',
+      name: 'Acme Corp',
+      prefill: {
+        email: 'gaurav.kumar@example.com',
+        contact: '9191919191'
       },
       theme: {
-        color: '#F37254'
+        color: '#3399cc'
       }
     }
     try {
-    let data = (await Checkout.open(options));
-    this.presentAlert(data.response);
+      let data = (await Checkout.open(options));
+      console.log(data.response+"AcmeCorp");
+
+      this.presentAlert(data.response);
     } catch (error) {
       this.presentAlert(error.message); //Doesn't appear at all
     }
   }
+
+  async presentAlert(response: string){
+    // let responseObj = JSON.parse(response)
+    console.log("message"+ response['razorpay_payment_id']);
+    const alert = await this.alertController.create({
+      message:response['razorpay_payment_id'],
+      backdropDismiss: true,
+    });
+
+    await alert.present();
+  }
+
+}
 ```
 
 ###
