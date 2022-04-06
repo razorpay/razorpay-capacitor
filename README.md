@@ -69,7 +69,7 @@ export class HomePage {
       theme: {
         color: '#3399cc'
       }
-    }
+    };
     try {
       let data = (await Checkout.open(options));
       console.log(data.response+"AcmeCorp");
