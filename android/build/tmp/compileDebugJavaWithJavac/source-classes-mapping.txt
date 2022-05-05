@@ -1,0 +1,6 @@
+com/ionicframework/capacitor/capacitorrazorpay/BuildConfig.java
+ com.ionicframework.capacitor.capacitorrazorpay.BuildConfig
+com/ionicframework/capacitor/Checkout.java
+ com.ionicframework.capacitor.Checkout
+ com.ionicframework.capacitor.Checkout$1
+ com.ionicframework.capacitor.Checkout$2
