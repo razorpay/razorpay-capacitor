@@ -53,18 +53,15 @@ extension Checkout : RazorpayPaymentCompletionProtocolWithData, ExternalWalletSe
     }
     public func onPaymentError(_ code: Int32, description str: String, andData data: [AnyHashable : Any]?) {
         if let call = call {
-            var response = [String: Any]()
+
             do{
-                let dataJson = try JSONSerialization.data(withJSONObject: (data! as NSDictionary), options: [])
+                let dataJson = try JSONSerialization.data(withJSONObject: (data) ?? "\(code):\(str)", options: [])
                 let dataString = String(data: dataJson, encoding: .utf8)!
                 call.reject("", dataString, nil)
             }catch{
                 print("catch")
+                call.reject("",str, nil)
             }
-            
-            
-            
-            
         }
     }
     
