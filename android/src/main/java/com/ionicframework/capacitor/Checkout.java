@@ -69,7 +69,11 @@ public class Checkout extends Plugin  {
 
             @Override
             public void onPaymentError(int i, String s, PaymentData paymentData) {
-                   lastSavedCall.reject(s,""+i);
+                try{
+                    lastSavedCall.reject(paymentData.getData().getJSONObject("error").toString(),paymentData.getData().getJSONObject("error").toString(), null);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
         }, new ExternalWalletListener() {

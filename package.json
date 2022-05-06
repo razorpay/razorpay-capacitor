@@ -1,6 +1,6 @@
 {
   "name": "capacitor-razorpay",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "This plugin is used for integration related to ionic Capacitor and its latest versions.",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
