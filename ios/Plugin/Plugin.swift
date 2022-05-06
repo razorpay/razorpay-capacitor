@@ -55,12 +55,18 @@ extension Checkout : RazorpayPaymentCompletionProtocolWithData, ExternalWalletSe
         if let call = call {
 
             do{
-                let dataJson = try JSONSerialization.data(withJSONObject: (data) ?? "\(code):\(str)", options: [])
-                let dataString = String(data: dataJson, encoding: .utf8)!
-                call.reject("", dataString, nil)
+                if let respData = data {
+                    let dataJson = try JSONSerialization.data(withJSONObject: respData, options: [])
+                    let dataString = String(data: dataJson, encoding: .utf8) ?? "\(code):\(str)"
+                    call.reject("", dataString, nil)
+//
+                }else{
+                    call.reject("","\(code):\(str)", nil)
+                }
+                
             }catch{
                 print("catch")
-                call.reject("",str, nil)
+                call.reject("","\(code):\(str)", nil)
             }
         }
     }
