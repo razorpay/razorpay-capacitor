@@ -17,6 +17,10 @@ Capacitor plugin to support [Razorpay Standard Checkout](https://developer.apple
 </a>
  -->
 
+## Latest Changes
+- Added support for Capacitor 4 migration
+- In case need to be used with Capacitor3 please install version 1.1.1 
+
 ## Installation
 
 - `npm i -S https://github.com/razorpay/razorpay-capacitor.git`
