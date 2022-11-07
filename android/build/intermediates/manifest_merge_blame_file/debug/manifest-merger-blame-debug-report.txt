@@ -3,9 +3,9 @@
 3    package="com.ionicframework.capacitor.capacitorrazorpay" >
 4
 5    <uses-sdk
-6        android:minSdkVersion="21"
-6-->/Users/vivek.shindhe/WebstormProjects/razorpay/projects/capacitor/razorpay-capacitor/android/src/main/AndroidManifest.xml
-7        android:targetSdkVersion="30" />
-7-->/Users/vivek.shindhe/WebstormProjects/razorpay/projects/capacitor/razorpay-capacitor/android/src/main/AndroidManifest.xml
+6        android:minSdkVersion="22"
+6-->/Users/vivek.shindhe/Projects/razorpay/capacitor/razorpay-capacitor/android/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="32" />
+7-->/Users/vivek.shindhe/Projects/razorpay/capacitor/razorpay-capacitor/android/src/main/AndroidManifest.xml
 8
 9</manifest>

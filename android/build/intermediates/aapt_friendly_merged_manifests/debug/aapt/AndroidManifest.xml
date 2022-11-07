@@ -3,7 +3,7 @@
     package="com.ionicframework.capacitor.capacitorrazorpay" >
 
     <uses-sdk
-        android:minSdkVersion="21"
-        android:targetSdkVersion="30" />
+        android:minSdkVersion="22"
+        android:targetSdkVersion="32" />
 
 </manifest>
