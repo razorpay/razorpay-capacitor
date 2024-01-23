@@ -5,6 +5,7 @@
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
+  "type": "module",
   "scripts": {
     "lint": "npm run prettier -- --check && npm run swiftlint -- lint",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
@@ -17,18 +18,18 @@
   "author": "sachin.nautiyal@razorpay.com",
   "license": "MIT",
   "devDependencies": {
-    "@capacitor/android": "^4.0.1",
-    "@capacitor/core": "^4.0.1",
-    "@capacitor/ios": "^4.0.1",
-    "@ionic/prettier-config": "^1.0.0",
-    "@ionic/swiftlint-config": "^1.0.0",
-    "@rollup/plugin-node-resolve": "^8.1.0",
-    "prettier": "^2.0.5",
-    "prettier-plugin-java": "^0.8.0",
-    "rimraf": "^3.0.0",
-    "rollup": "^2.21.0",
-    "swiftlint": "^1.0.1",
-    "typescript": "~3.8.3"
+    "@capacitor/android": "5.6.0",
+    "@capacitor/core": "5.6.0",
+    "@capacitor/ios": "^5.6.0",
+    "@ionic/prettier-config": "^4.0.0",
+    "@ionic/swiftlint-config": "^1.1.2",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "prettier": "^3.2.4",
+    "prettier-plugin-java": "^2.5.0",
+    "rimraf": "^5.0.5",
+    "rollup": "^4.9.6",
+    "swiftlint": "^1.0.2",
+    "typescript": "~5.3.3"
   },
   "peerDependencies": {
     "@capacitor/core": "^4.0.1"

@@ -91,5 +91,6 @@ export class CheckoutWeb extends WebPlugin {
 const Checkout = registerPlugin('Checkout', {
     web: () => import('./web').then(m => new m.CheckoutWeb())
 });
+export * from './definitions';
 export { Checkout };
 //# sourceMappingURL=web.js.map
