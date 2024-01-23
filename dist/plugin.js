@@ -96,16 +96,14 @@ var capacitorPlugin = (function (exports, core) {
 
     var web = /*#__PURE__*/Object.freeze({
         __proto__: null,
-        CheckoutWeb: CheckoutWeb,
-        Checkout: Checkout
+        Checkout: Checkout,
+        CheckoutWeb: CheckoutWeb
     });
 
     exports.Checkout = Checkout;
     exports.CheckoutWeb = CheckoutWeb;
 
-    Object.defineProperty(exports, '__esModule', { value: true });
-
     return exports;
 
-}({}, capacitorExports));
+})({}, capacitorExports);
 //# sourceMappingURL=plugin.js.map
