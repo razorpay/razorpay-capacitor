@@ -67,7 +67,7 @@ export class HomePage {
       currency: 'INR',
       name: 'Acme Corp',
       prefill: {
-        email: 'gaurav.kumar@example.com',
+        email: 'gaurav.gupta@example.com',
         contact: '9191919191'
       },
       theme: {
