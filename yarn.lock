@@ -24,22 +24,22 @@
     chalk "^2.4.2"
     js-tokens "^4.0.0"
 
-"@capacitor/android@^5.0.0":
-  version "5.7.0"
-  resolved "https://registry.npmjs.org/@capacitor/android/-/android-5.7.0.tgz"
-  integrity sha512-0bnG1dqfT/nTjzMeHF/a5kF8mqGjHrPLADNqn41seWDfb2ch6AMiKUHsmHpEOWmGIrWOM25qNTrTOytoCSpuXg==
+"@capacitor/android@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/@capacitor/android/-/android-6.0.0.tgz"
+  integrity sha512-NwL87VO9F1WY/EgvJZN9pIhjejq688k2fRW6XWNLVe3cgGE6nUb9J34KI68fhx3139cf2LVGPUYs+mwZC8esiQ==
 
-"@capacitor/core@^5.0.0", "@capacitor/core@^5.7.0":
-  version "5.7.0"
-  resolved "https://registry.npmjs.org/@capacitor/core/-/core-5.7.0.tgz"
-  integrity sha512-wa9Fao+Axa1t2ZERMyQD9r0xyfglQyC4DHQKintzKaIqcRuVe9J31TmfD3IxROYi9LGpY4X8cq4m4bjb0W94Qg==
+"@capacitor/core@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/@capacitor/core/-/core-6.0.0.tgz"
+  integrity sha512-NvxIQsJcMiIV+Le1DilR2GGyQQbDInfXK1UywGROQ5mycdFlW5XoAPZ+MKnFGB123RoEgE3uhDGgwTXUmSlX9A==
   dependencies:
     tslib "^2.1.0"
 
-"@capacitor/ios@^5.0.0":
-  version "5.7.0"
-  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-5.7.0.tgz"
-  integrity sha512-zoEdsYQHI1zz2vjKsTpu5bSfxQQ5jrk3Qs6Op9MYcckZZ2QWIs0YpL99p+zODXNpkkyLG73NXEIrOjvyI9jx8A==
+"@capacitor/ios@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/@capacitor/ios/-/ios-6.0.0.tgz"
+  integrity sha512-7mAs3gjWiE5DPM4AGPduqFSDGXCPwwqQRMzbohVway7/cTWnHomHV8mIojMZE4GILeWO2fILbyu3C8q9pHg2vg==
 
 "@ionic/prettier-config@^1.0.0":
   version "1.0.1"
