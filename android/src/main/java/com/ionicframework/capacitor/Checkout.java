@@ -53,7 +53,7 @@ public class Checkout extends Plugin  {
                     try {
                         jsObject.put("response", paymentData.getData());
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        
                     }
                     Log.d("RESULT",jsObject.toString());
 
@@ -63,7 +63,7 @@ public class Checkout extends Plugin  {
                     }
                     lastSavedCall.resolve(jsObject);
                 }catch (Exception e){
-                    e.printStackTrace();
+                    
                 }
             }
 
@@ -72,7 +72,7 @@ public class Checkout extends Plugin  {
                 try{
                     lastSavedCall.reject(paymentData.getData().getJSONObject("error").toString(),paymentData.getData().getJSONObject("error").toString(), new JSObject());
                 }catch (Exception e){
-                    e.printStackTrace();
+                    
                 }
 
             }
