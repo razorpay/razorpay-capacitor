@@ -3,10 +3,7 @@ import type { CheckoutPlugin } from './definitions';
 
 export class CheckoutWeb extends WebPlugin implements CheckoutPlugin {
   constructor() {
-    super({
-      name: 'Checkout',
-      platforms: ['web'],
-    });
+    super();
   }
 
   async echo(options: { value: string }): Promise<{ value: string }> {

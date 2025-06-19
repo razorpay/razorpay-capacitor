@@ -3,10 +3,7 @@ var capacitorPlugin = (function (exports, core) {
 
     class CheckoutWeb extends core.WebPlugin {
         constructor() {
-            super({
-                name: 'Checkout',
-                platforms: ['web'],
-            });
+            super();
         }
         async echo(options) {
             console.log('ECHO', options);
@@ -107,5 +104,5 @@ var capacitorPlugin = (function (exports, core) {
 
     return exports;
 
-}({}, capacitorExports));
+})({}, capacitorExports);
 //# sourceMappingURL=plugin.js.map

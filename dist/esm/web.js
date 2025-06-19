@@ -1,10 +1,7 @@
 import { registerPlugin, WebPlugin } from '@capacitor/core';
 export class CheckoutWeb extends WebPlugin {
     constructor() {
-        super({
-            name: 'Checkout',
-            platforms: ['web'],
-        });
+        super();
     }
     async echo(options) {
         console.log('ECHO', options);
@@ -91,5 +88,6 @@ export class CheckoutWeb extends WebPlugin {
 const Checkout = registerPlugin('Checkout', {
     web: () => import('./web').then(m => new m.CheckoutWeb())
 });
+export * from './definitions';
 export { Checkout };
 //# sourceMappingURL=web.js.map
