@@ -1,7 +1,7 @@
 {
   "name": "capacitor-razorpay",
   "version": "1.2.0",
-  "description": "This plugin is used for integration related to ionic Capacitor and its latest versions.",
+  "description": "This plugin is used for integration related to Ionic Capacitor and its latest versions.",
   "main": "dist/plugin.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -56,9 +56,9 @@
   "swiftlint": "@ionic/swiftlint-config",
   "repository": {
     "type": "git",
-    "url": "https://github.com/razorpay/razorpay-cordova"
+    "url": "https://github.com/razorpay/razorpay-capacitor"
   },
   "bugs": {
-    "url": "https://github.com/razorpay/razorpay-cordova/issues"
+    "url": "https://github.com/razorpay/razorpay-capacitor/issues"
   }
 }
