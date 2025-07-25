@@ -1,6 +1,2 @@
-// declare module '@capacitor/core' {
-//   interface PluginRegistry {
-//     Checkout: CheckoutPlugin;
-//   }
-// }
+export {};
 //# sourceMappingURL=definitions.js.map
