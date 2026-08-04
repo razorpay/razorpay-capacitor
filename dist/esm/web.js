@@ -17,7 +17,7 @@ export class CheckoutWeb extends WebPlugin {
             finalOps['handler'] = function (res) {
                 console.log(res.razorpay_payment_id);
                 resolve({
-                    response: res
+                    response: res,
                 });
             };
             finalOps['modal.ondismiss'] = function () {
@@ -40,7 +40,7 @@ export class CheckoutWeb extends WebPlugin {
                 try {
                     razorpay = new window.Razorpay(finalOps);
                     razorpay.open();
-                    razorpay.on(('payment.failed'), (res) => {
+                    razorpay.on('payment.failed', (res) => {
                         var _a;
                         retryCount = retryCount - 1;
                         if (retryCount < 0) {
@@ -52,9 +52,12 @@ export class CheckoutWeb extends WebPlugin {
                 }
                 catch (err) {
                     reject({
-                        response: err
+                        response: err,
                     });
                 }
+            });
+            rzpjs.addEventListener('error', () => {
+                reject({ code: 0, description: 'Failed to load Razorpay checkout.js' });
             });
         });
         // var rjs = document.getElementsByTagName('script')[0]
@@ -86,7 +89,7 @@ export class CheckoutWeb extends WebPlugin {
     }
 }
 const Checkout = registerPlugin('Checkout', {
-    web: () => import('./web').then(m => new m.CheckoutWeb())
+    web: () => import('./web').then((m) => new m.CheckoutWeb()),
 });
 export * from './definitions';
 export { Checkout };
