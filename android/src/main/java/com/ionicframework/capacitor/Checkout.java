@@ -69,12 +69,32 @@ public class Checkout extends Plugin  {
 
             @Override
             public void onPaymentError(int i, String s, PaymentData paymentData) {
-                try{
-                    lastSavedCall.reject(paymentData.getData().getJSONObject("error").toString(),paymentData.getData().getJSONObject("error").toString(), new JSObject());
-                }catch (Exception e){
-                    e.printStackTrace();
+                if (lastSavedCall == null) {
+                    Log.e("ERROR", "no call saved in onPaymentError");
+                    return;
                 }
-
+                try {
+                    JSONObject data = paymentData.getData();
+                    String errorString;
+                    if (data != null && data.has("error") && !data.isNull("error")) {
+                        errorString = data.getJSONObject("error").toString();
+                    } else if (data != null) {
+                        errorString = data.toString();
+                    } else {
+                        errorString = new JSONObject().put("code", i).put("description", s).toString();
+                    }
+                    lastSavedCall.reject(errorString, errorString, new JSObject());
+                } catch (Exception e) {
+                    Log.e("ERROR", "Failed to parse payment error data", e);
+                    try {
+                        JSONObject fallback = new JSONObject();
+                        fallback.put("code", i);
+                        fallback.put("description", s);
+                        lastSavedCall.reject(fallback.toString(), fallback.toString(), new JSObject());
+                    } catch (Exception ex) {
+                        lastSavedCall.reject("Payment error: code=" + i + ", description=" + s);
+                    }
+                }
             }
         }, new ExternalWalletListener() {
             @Override
